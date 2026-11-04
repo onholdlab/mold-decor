@@ -55,6 +55,11 @@ button:focus-visible { outline: 2px solid var(--warn); outline-offset: 2px; }
 .card.guess { background: var(--guess); }
 .card .tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; color: var(--guess-ink); background: #fff; padding: 1px 7px; border-radius: 3px; }
 .card .tag.fact { color: #4f7a6c; }
+.cards h3.sec { font-size: 12px; letter-spacing: .14em; color: var(--ink-2); font-weight: 500; margin-top: 6px; }
+.card p.see { color: var(--guess-ink); font-weight: 500; }
+.card.guess.locked { background: color-mix(in srgb, var(--guess) 45%, transparent); }
+.spores { padding-left: 10px; }
+.spores::before { content: '孢子'; font-size: 12px; color: var(--ink-2); margin-right: 2px; }
 .fine { font-size: 12px; color: var(--ink-2); margin-top: 14px; line-height: 1.6; }
 
 @media (min-width: 860px) {

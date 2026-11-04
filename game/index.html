@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
 <title>黴菌裝潢</title>
-<meta name="description" content="放麵包、米、水滴或乾燥劑，引導黴菌自己長過去，把牆角養成裝潢。">
+<meta name="description" content="放食物、水滴或乾燥劑，引導黴菌自己長過去，把牆角養成裝潢。">
 <link rel="stylesheet" href="style.css">
 <style id="inapp-lock">
 /* Threads / IG / FB 內建瀏覽器：鎖住整頁（寫法沿用 onholdlab/crossroad） */
@@ -44,6 +44,7 @@ html{height:calc(100% + 2px)!important}
   <section class="stage" id="stage">
     <canvas id="base"></canvas>
     <canvas id="over"></canvas>
+    <canvas id="fx"></canvas>
     <div class="hud">
       <span id="day">第 1 天</span>
       <span id="env"></span>
@@ -53,13 +54,14 @@ html{height:calc(100% + 2px)!important}
 
   <section class="panel">
     <div class="row tools" role="radiogroup" aria-label="要放什麼" id="tools"></div>
+    <div class="row tools spores" role="radiogroup" aria-label="哪一種孢子" id="spores" hidden></div>
     <div class="row env">
       <div class="seg" role="radiogroup" aria-label="濕度" id="hum"></div>
       <div class="seg" role="radiogroup" aria-label="溫度" id="temp"></div>
     </div>
     <div class="row bar">
       <button type="button" id="speed" class="ghost">速度 ×1</button>
-      <button type="button" id="dexBtn">圖鑑 <span id="dexCount">0/6</span></button>
+      <button type="button" id="dexBtn">圖鑑 <span id="dexCount">0/15</span></button>
       <button type="button" id="reset" class="ghost">重來</button>
     </div>
   </section>
