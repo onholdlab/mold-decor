@@ -1,0 +1,64 @@
+/* 沿用第 2 輪方向 1 的紙色與字；不用邊框，靠底色區分 */
+:root{
+  --bg:#f2eee6; --ink:#3a362f; --ink-2:#7d766a; --chip:#e6dfd2; --chip-on:#3a362f; --chip-on-fg:#f2eee6;
+  --sheet:#f7f4ee; --guess:#e9e2f0; --guess-ink:#5b4a73; --warn:#a8364c;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); color: var(--ink);
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif; -webkit-text-size-adjust: 100%; }
+button { font: inherit; color: inherit; cursor: pointer; border: 0; }
+button:focus-visible { outline: 2px solid var(--warn); outline-offset: 2px; }
+
+#app { height: 100%; display: flex; flex-direction: column;
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+
+.stage { position: relative; flex: 1 1 auto; min-height: 0; display: flex; align-items: center; justify-content: center; }
+.stage canvas { position: absolute; touch-action: none; }
+#base { background: #e3dccf; }
+.hud { position: absolute; left: max(14px, env(safe-area-inset-left, 0px)); top: 10px; display: flex; gap: 12px; font-size: 12px; letter-spacing: .08em; color: var(--ink-2); font-variant-numeric: tabular-nums; pointer-events: none; }
+.msg { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); max-width: calc(100% - 32px); width: max-content;
+  background: rgba(58,54,47,.86); color: #f7f4ee; font-size: 13px; line-height: 1.5; padding: 7px 12px; border-radius: 6px; pointer-events: none;
+  opacity: 0; transition: opacity .3s; }
+.msg.on { opacity: 1; }
+
+.panel { flex: 0 0 auto; display: flex; flex-direction: column; gap: 8px;
+  padding: 10px max(12px, env(safe-area-inset-right, 0px)) 12px max(12px, env(safe-area-inset-left, 0px)); }
+.row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.tools button, .seg button { background: var(--chip); padding: 7px 11px; border-radius: 99px; font-size: 13px; line-height: 1.2; }
+.tools button[aria-checked="true"], .seg button[aria-checked="true"] { background: var(--chip-on); color: var(--chip-on-fg); }
+.tools button .sw { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 5px; vertical-align: 1px; }
+.env { gap: 10px; }
+.seg { display: flex; gap: 4px; align-items: center; }
+.seg::before { content: attr(aria-label); font-size: 12px; color: var(--ink-2); margin-right: 2px; }
+.bar { justify-content: space-between; }
+.bar button { background: var(--chip-on); color: var(--chip-on-fg); padding: 8px 14px; border-radius: 6px; font-size: 14px; }
+.bar button.ghost { background: transparent; color: var(--ink); padding-inline: 6px; }
+#reset.armed { color: var(--warn); }
+
+.sheet-bg { position: fixed; inset: 0; background: rgba(40,36,30,.35); z-index: 20; }
+.sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 21; max-height: 82%; overflow-y: auto; background: var(--sheet);
+  border-radius: 12px 12px 0 0; max-width: 640px; margin: 0 auto;
+  padding: 16px max(16px, env(safe-area-inset-right, 0px)) calc(20px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); }
+.sheet-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.sheet-head h2 { font-size: 17px; }
+.sheet-head .ghost { background: transparent; padding: 6px; }
+.cards { display: flex; flex-direction: column; gap: 10px; }
+.card { background: #fff; border-radius: 8px; padding: 12px 14px; display: grid; grid-template-columns: 64px minmax(0,1fr); gap: 12px; align-items: start; }
+.card canvas { width: 64px; height: 64px; background: var(--bg); border-radius: 4px; }
+.card h3 { font-size: 15px; display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; }
+.card h3 i { font-size: 12px; color: var(--ink-2); font-weight: 400; }
+.card p { font-size: 13px; line-height: 1.6; color: #5e584d; margin-top: 3px; }
+.card .how { color: var(--ink-2); font-size: 12px; }
+.card a { color: var(--ink); font-size: 12px; }
+.card.locked { background: transparent; }
+.card.locked h3, .card.locked p { color: var(--ink-2); }
+.card.guess { background: var(--guess); }
+.card .tag { font-size: 11px; font-weight: 700; letter-spacing: .12em; color: var(--guess-ink); background: #fff; padding: 1px 7px; border-radius: 3px; }
+.card .tag.fact { color: #4f7a6c; }
+.fine { font-size: 12px; color: var(--ink-2); margin-top: 14px; line-height: 1.6; }
+
+@media (min-width: 860px) {
+  #app { flex-direction: row; }
+  .panel { width: 360px; justify-content: center; padding: 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .msg { transition: none; } }
