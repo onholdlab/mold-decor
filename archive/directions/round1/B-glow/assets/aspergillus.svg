@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="body" cx="50%" cy="45%" r="60%">
+      <stop offset="0" stop-color="#fff2b0"/>
+      <stop offset="0.5" stop-color="#f0b43c"/>
+      <stop offset="1" stop-color="#7a4a12"/>
+    </radialGradient>
+    <radialGradient id="lamp" cx="45%" cy="40%" r="55%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.35" stop-color="#ffe48a"/>
+      <stop offset="1" stop-color="#f0b43c" stop-opacity="0.15"/>
+    </radialGradient>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="9" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.2"/></filter>
+    <style>
+      .lamp { animation: lamp 4s ease-in-out infinite; transform-origin: center; }
+      .l2 { animation-delay:-1.3s } .l3 { animation-delay:-2.6s }
+      @keyframes lamp { 0%,100% { opacity:.6; } 50% { opacity:1; } }
+      .bob { animation: bob 4.2s ease-in-out infinite; }
+      .b2 { animation-delay:-1.4s } .b3 { animation-delay:-2.8s }
+      @keyframes bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-3px) } }
+    </style>
+  </defs>
+
+  <circle cx="100" cy="140" r="68" fill="#f0b43c" opacity="0.18" filter="url(#glow)"/>
+
+  <g filter="url(#soft)">
+    <path fill="url(#body)" d="M44 164 C40 140 62 128 78 134 C84 112 116 108 128 128 C152 122 168 142 160 164 C170 176 148 186 134 180 C120 190 88 190 74 180 C56 186 40 178 44 164 Z"/>
+  </g>
+  <g stroke="#ffe48a" stroke-width="1.4" fill="none" opacity="0.45" stroke-linecap="round">
+    <path d="M70 158 q24 -16 48 -2 q12 6 24 0"/>
+  </g>
+
+  <!-- 燈籠狀孢子頭（麴菌的放射狀圓頭） -->
+  <g class="bob">
+    <path d="M100 130 V72" stroke="#f7cf6a" stroke-width="3" stroke-linecap="round" opacity="0.85"/>
+    <g class="lamp" filter="url(#glow)">
+      <circle cx="100" cy="58" r="18" fill="url(#lamp)"/>
+      <g fill="#fff6c8" opacity="0.9"><circle cx="90" cy="50" r="2.2"/><circle cx="106" cy="44" r="2.2"/><circle cx="114" cy="58" r="2.2"/><circle cx="94" cy="68" r="2.2"/><circle cx="84" cy="62" r="2"/></g>
+    </g>
+  </g>
+  <g class="bob b2">
+    <path d="M66 142 V100" stroke="#f7cf6a" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+    <g class="lamp l2" filter="url(#glow)"><circle cx="66" cy="90" r="12" fill="url(#lamp)"/></g>
+  </g>
+  <g class="bob b3">
+    <path d="M138 142 V104" stroke="#f7cf6a" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+    <g class="lamp l3" filter="url(#glow)"><circle cx="138" cy="94" r="11" fill="url(#lamp)"/></g>
+  </g>
+
+  <g fill="#ffe48a" class="lamp l2">
+    <circle cx="36" cy="112" r="1.5"/><circle cx="166" cy="110" r="1.4"/><circle cx="156" cy="62" r="1.2"/><circle cx="46" cy="74" r="1.2"/>
+  </g>
+</svg>

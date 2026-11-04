@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 300" width="360" height="300">
+  <defs>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8ff0a4"/><stop offset="1" stop-color="#1f9a5a"/>
+    </linearGradient>
+    <linearGradient id="leafDark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#4fd47f"/><stop offset="1" stop-color="#0f6b44"/>
+    </linearGradient>
+    <style>
+      .vine { transform-origin: 0 0; animation: sway 6s ease-in-out infinite; }
+      .v2 { animation-delay:-2s } .v3 { animation-delay:-4s }
+      @keyframes sway { 0%,100% { transform: rotate(-1.5deg) } 50% { transform: rotate(1.5deg) } }
+      .mon { transform-origin: 40px 280px; animation: breathe 5s ease-in-out infinite; }
+      @keyframes breathe { 0%,100% { transform: rotate(-1deg) } 50% { transform: rotate(1deg) } }
+    </style>
+  </defs>
+
+  <!-- 垂吊黃金葛 1：從左上掛下來 -->
+  <g transform="translate(-20 0)"><g class="vine" style="transform-origin:34px 0px">
+    <path d="M34 0 C30 40 44 70 36 110 C32 130 40 150 38 166" stroke="#2f8a57" stroke-width="2" fill="none"/>
+    <g fill="url(#leaf)">
+      <path d="M36 28 c-14 -2 -18 12 -4 18 c10 -2 12 -12 4 -18z"/>
+      <path d="M40 52 c14 -4 20 10 6 18 c-10 -2 -12 -12 -6 -18z"/>
+      <path d="M34 80 c-14 -2 -18 12 -4 18 c10 -2 12 -12 4 -18z"/>
+      <path d="M38 108 c14 -4 20 10 6 18 c-10 -2 -12 -12 -6 -18z"/>
+      <path d="M36 138 c-13 -2 -17 11 -4 17 c9 -2 11 -11 4 -17z"/>
+      <path d="M39 160 c12 -3 17 9 5 16 c-9 -2 -11 -11 -5 -16z"/>
+    </g>
+  </g></g>
+
+  <!-- 垂吊黃金葛 2：沿天花板右側 -->
+  <g class="vine v2" style="transform-origin:300px 10px">
+    <path d="M300 10 C296 40 310 60 302 90 C298 104 306 120 304 134" stroke="#2f8a57" stroke-width="2" fill="none"/>
+    <g fill="url(#leafDark)">
+      <path d="M302 24 c-13 -2 -17 11 -4 17 c9 -2 11 -11 4 -17z"/>
+      <path d="M306 48 c13 -3 18 9 6 16 c-9 -2 -11 -11 -6 -16z"/>
+      <path d="M300 74 c-13 -2 -17 11 -4 17 c9 -2 11 -11 4 -17z"/>
+      <path d="M305 100 c13 -3 18 9 6 16 c-9 -2 -11 -11 -6 -16z"/>
+      <path d="M303 126 c-11 -2 -15 10 -3 15 c8 -2 10 -10 3 -15z"/>
+    </g>
+  </g>
+
+  <!-- 中間一條短的，掛在植物燈旁 -->
+  <g class="vine v3" style="transform-origin:120px 50px">
+    <path d="M120 50 C118 70 126 84 122 104" stroke="#2f8a57" stroke-width="1.8" fill="none"/>
+    <g fill="url(#leaf)">
+      <path d="M122 62 c-11 -2 -15 10 -3 15 c8 -2 10 -10 3 -15z"/>
+      <path d="M124 84 c11 -3 15 8 5 14 c-8 -2 -10 -9 -5 -14z"/>
+      <path d="M121 100 c-10 -2 -13 9 -3 13 c7 -2 9 -9 3 -13z"/>
+    </g>
+  </g>
+
+  <!-- 龜背芋：左前方地上 -->
+  <g class="mon">
+    <path d="M18 250 l6 40 h32 l6 -40 z" fill="#1c2a30"/>
+    <path d="M18 250 h44 l-2 6 h-40 z" fill="#37f0e6" opacity="0.5"/>
+    <path d="M40 250 C40 230 44 214 54 200" stroke="#2f8a57" stroke-width="3" fill="none"/>
+    <path d="M40 250 C38 234 30 222 20 212" stroke="#2f8a57" stroke-width="3" fill="none"/>
+    <path d="M40 250 C42 238 48 232 56 232" stroke="#2f8a57" stroke-width="2.5" fill="none"/>
+    <!-- 龜背芋葉（有裂口） -->
+    <path d="M54 200 c-20 -26 -4 -52 24 -46 c22 4 30 30 14 46 c-8 10 -26 12 -38 0z M64 170 l10 14 M78 166 l6 16 M60 186 l14 6" fill="url(#leafDark)" stroke="#0b3d2a" stroke-width="1.2"/>
+    <path d="M20 212 c-22 -14 -22 -42 2 -46 c20 -2 32 18 22 36 c-4 8 -14 12 -24 10z M14 184 l10 10 M26 176 l6 14" fill="url(#leaf)" stroke="#0b3d2a" stroke-width="1.2"/>
+    <path d="M56 232 c6 -18 26 -22 36 -8 c6 10 0 22 -12 24 c-10 2 -20 -4 -24 -16z M70 222 l10 8" fill="url(#leaf)" stroke="#0b3d2a" stroke-width="1.2"/>
+  </g>
+
+  <!-- 層架上的小蕨 -->
+  <g fill="url(#leaf)">
+    <path d="M312 182 c-8 -14 -4 -26 6 -30 c2 12 0 22 -6 30z"/>
+    <path d="M314 182 c0 -14 8 -24 18 -26 c-2 12 -8 22 -18 26z"/>
+    <path d="M310 182 c-10 -8 -16 -18 -14 -28 c10 6 16 16 14 28z"/>
+  </g>
+  <path d="M302 182 h24 l-2 10 h-20 z" fill="#1c2a30"/>
+</svg>

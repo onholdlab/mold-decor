@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>黴菌裝潢 · 第 2 輪筆記</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #faf7f2; color: #3b3530; font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif; line-height: 1.75; padding: 32px 20px 60px; }
+  main { max-width: 680px; margin: 0 auto; }
+  h1 { font-size: 24px; margin-bottom: 4px; }
+  .sub { color: #8a8178; font-size: 13px; margin-bottom: 24px; }
+  h2 { font-size: 18px; margin: 28px 0 8px; color: #5a4e44; }
+  p, li { font-size: 15px; }
+  ul, ol { padding-left: 22px; }
+  li { margin: 4px 0; }
+  code { background: #eee8df; padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>第 2 輪 · 三種造型語言</h1>
+  <p class="sub">2026-11-04 · 第 1 輪被打回的原因：同一輪廓換皮、睡臉模板、置中三卡、太對稱。</p>
+
+  <h2>這一輪怎麼避開第 1 輪的問題</h2>
+  <ul>
+    <li>三個方向的黴菌是用三套不同方法「做」出來的，不是同一張圖換濾鏡：方向 1 是演算法即時生成（Canvas），方向 2 是用腳本畫的墨線＋點描 SVG，方向 3 是三色版分層套印的 SVG。</li>
+    <li>全部從真實形態出發：青黴＝分生孢子柄的三層不對稱分支＋瓶梗＋孢子鏈；麴菌＝頂囊＋放射狀孢子鏈（刻意只覆蓋 200–320°）；紅麴＝菌落的放射皺褶＋閉囊殼。沒有臉、沒有腮紅、沒有光暈底。</li>
+    <li>版面：方向 1 是全幅場景＋全寬標本條；方向 2 是圖版式非對稱擺放；方向 3 是海報式重疊出血。房間構圖各自不同：方向 1 牆面正視、方向 2 剖面／立面圖、方向 3 平面海報。</li>
+  </ul>
+
+  <h2>方向 1 · 程式生成</h2>
+  <ul>
+    <li>每次載入或點擊場景都換種子，三隻各自的規則見 <code>assets/growth.js</code>（有註解）。紅麴用 Eden 擴張模型，加了方向偏好所以會長出瓣。</li>
+    <li>最適合「養裝潢」：生長過程本身就是畫面，7 天在 14 秒內跑完，之後接真實時間很自然。</li>
+    <li>弱點：目前只有線和圓點，質感薄；要變漂亮得再加一層筆觸／顆粒材質。手機效能：紅麴 900–1400 格一次長完沒問題，但如果同畫面十幾團要改成分批。</li>
+  </ul>
+
+  <h2>方向 2 · 科學圖譜</h2>
+  <ul>
+    <li>最接近你說的 Haeckel：麴菌那張是整輪最強的一張。標註、放大圖、比例尺都是圖版語言，科普可以直接長在上面。</li>
+    <li>弱點：動態最少（只有極慢的呼吸），「長」的感覺要靠分段顯示（先菌絲、再柄、再孢子）來做。SVG 檔偏大（麴菌 113 KB），之後要簡化點描。</li>
+  </ul>
+
+  <h2>方向 3 · Risograph</h2>
+  <ul>
+    <li>三色（螢光粉／藍／黃）各自是一個 <code>&lt;g&gt;</code>「版」，用 multiply 疊色、整版錯位 2–5 px、顆粒濾鏡、位移濾鏡做手撕邊。各版有極慢的錯位漂移動畫。</li>
+    <li>最有「ONHOLDLAB 印刷品」的身分感，Threads 縮圖最吃香。</li>
+    <li>弱點：形態的精確度最低（為了版畫味，結構簡化成筆觸和點）；<code>mix-blend-mode</code> 在 iOS Safari 的 <code>&lt;img&gt;</code> 內嵌 SVG 裡偶爾會失效，交付前要在 iPhone 上確認疊色有出來。</li>
+  </ul>
+
+  <h2>還沒回的決定（沿用第 1 輪）</h2>
+  <ol>
+    <li>生長是真實時間、加速、還是混合？</li>
+    <li>玩家調環境（濕度／溫度／光線），還是直接選黴菌放？</li>
+    <li>（「要不要臉」這題這輪已經先替你答成「不要」，如果你想保留請講。）</li>
+  </ol>
+
+  <h2>驗證狀態</h2>
+  <ul>
+    <li>三頁都在雲端 headless Chrome 截圖檢查過（手機 390 寬、桌機 1280 寬），console 沒有錯誤。</li>
+    <li>Threads 內建瀏覽器「不被滑走」沿用第 1 輪做法，一樣無法在雲端驗證，請你實機試。</li>
+  </ul>
+</main>
+</body>
+</html>

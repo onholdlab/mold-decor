@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <radialGradient id="body" cx="45%" cy="40%" r="65%">
+      <stop offset="0" stop-color="#ffe6ea"/>
+      <stop offset="0.55" stop-color="#ff9fb0"/>
+      <stop offset="1" stop-color="#e5667f"/>
+    </radialGradient>
+    <radialGradient id="dot" cx="40%" cy="38%" r="65%">
+      <stop offset="0" stop-color="#fff0f2"/>
+      <stop offset="1" stop-color="#d94f6c"/>
+    </radialGradient>
+    <filter id="fuzz" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="8" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="halo" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+    <style>
+      .breathe { transform-origin: 100px 150px; animation: breathe 5s ease-in-out infinite; }
+      @keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.04, 1.02); } }
+      .twinkle { animation: tw 2.4s ease-in-out infinite; }
+      .t2 { animation-delay: -0.8s; } .t3 { animation-delay: -1.6s; }
+      @keyframes tw { 0%,100% { opacity: .55; } 50% { opacity: 1; } }
+    </style>
+  </defs>
+
+  <ellipse cx="100" cy="150" rx="78" ry="36" fill="#ffc2cf" opacity="0.6" filter="url(#halo)"/>
+
+  <!-- 紅麴：比較像一張鋪開的粉紅絨毯，低矮蔓延 -->
+  <g class="breathe">
+    <g filter="url(#fuzz)">
+      <g fill="url(#body)">
+        <ellipse cx="60" cy="152" rx="34" ry="22"/>
+        <ellipse cx="100" cy="142" rx="46" ry="30"/>
+        <ellipse cx="142" cy="154" rx="34" ry="20"/>
+        <ellipse cx="80" cy="166" rx="30" ry="16"/>
+        <ellipse cx="122" cy="168" rx="30" ry="16"/>
+        <ellipse cx="40" cy="168" rx="18" ry="10"/>
+        <ellipse cx="162" cy="170" rx="18" ry="10"/>
+      </g>
+    </g>
+    <!-- 小圓點 = 閉囊殼，像草莓籽 -->
+    <g fill="url(#dot)">
+      <circle class="twinkle" cx="70" cy="140" r="5"/>
+      <circle class="twinkle t2" cx="125" cy="130" r="5.5"/>
+      <circle class="twinkle t3" cx="100" cy="122" r="4.5"/>
+      <circle class="twinkle t2" cx="50" cy="160" r="4"/>
+      <circle class="twinkle" cx="150" cy="146" r="4.5"/>
+      <circle class="twinkle t3" cx="88" cy="172" r="4"/>
+      <circle class="twinkle" cx="135" cy="172" r="4"/>
+    </g>
+  </g>
+
+  <!-- 睡臉 -->
+  <path d="M88 146 q6 6 12 0" stroke="#a63b56" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M112 146 q6 6 12 0" stroke="#a63b56" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <circle cx="84" cy="156" r="5" fill="#ff7f9a" opacity="0.5"/>
+  <circle cx="128" cy="156" r="5" fill="#ff7f9a" opacity="0.5"/>
+  <path d="M100 155 q6 5 12 0" stroke="#a63b56" stroke-width="2" fill="none" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,43 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; width: 100%; overflow: hidden; position: fixed; overscroll-behavior: none;
+  background: #f4efe4; color: #2b2622;
+  font-family: "Noto Serif TC", "Noto Serif CJK TC", "Songti TC", "PMingLiU", serif; -webkit-text-size-adjust: 100%; }
+#app { height: 100%; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+  background-color: #f4efe4;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.25 0 0 0 0 0.2 0 0 0 0 0.15 0 0 0 0.05 0'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  padding: max(18px, env(safe-area-inset-top)) 0 max(32px, env(safe-area-inset-bottom)); }
+
+.plate-no { padding: 0 18px; font-size: 12px; letter-spacing: .25em; }
+.plate-no span { font-style: italic; letter-spacing: .05em; margin-left: 8px; opacity: .6; }
+
+.fig { position: relative; }
+.fig img { display: block; height: auto; animation: breathe 9s ease-in-out infinite; }
+@keyframes breathe { 0%,100% { transform: scale(1) } 50% { transform: scale(1.012) } }
+figcaption { font-size: 12px; line-height: 1.7; }
+figcaption b { font-size: 14px; margin-right: 6px; }
+figcaption i { opacity: .65; }
+
+/* 非對稱排版：圖靠邊，說明放另一側 */
+.fig-a { margin-top: 6px; }
+.fig-a img { width: 86%; margin-left: 14%; }
+.fig-a figcaption { position: absolute; left: 18px; top: 42%; max-width: 30%; }
+
+.fig-p { margin-top: -12px; }
+.fig-p img { width: 82%; margin-left: 0; animation-delay: -3s; }
+.fig-p figcaption { position: absolute; right: 18px; bottom: 36px; max-width: 46%; text-align: right; }
+
+.fig-m { margin-top: -6px; }
+.fig-m img { width: 90%; margin-left: 10%; animation-delay: -6s; }
+.fig-m figcaption { position: absolute; left: 18px; bottom: 16px; max-width: 44%; }
+
+.fig-room { margin-top: 18px; }
+.fig-room img { width: 100%; animation: none; }
+.fig-room figcaption { padding: 4px 18px 0; opacity: .8; }
+
+.foot { padding: 26px 18px 0; font-size: 11px; opacity: .55; letter-spacing: .06em; }
+
+@media (min-width: 720px) {
+  #app { padding-left: calc(50% - 360px); padding-right: calc(50% - 360px); }
+  .fig-a img, .fig-p img, .fig-m img { width: 64%; }
+  .fig-a img { margin-left: 36%; } .fig-m img { margin-left: 30%; }
+}

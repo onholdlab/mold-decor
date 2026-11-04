@@ -1,0 +1,74 @@
+/* 方向 A2：毛絨 × 霓虹植栽 */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%; width: 100%;
+  overflow: hidden; position: fixed;
+  overscroll-behavior: none;
+  background: #0a1419;
+  color: #d6ebe8;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+#app {
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  background:
+    radial-gradient(55% 35% at 12% 6%, rgba(255,79,216,.18) 0%, transparent 70%),
+    radial-gradient(45% 35% at 92% 24%, rgba(55,240,230,.14) 0%, transparent 70%),
+    radial-gradient(60% 40% at 50% 100%, rgba(47,138,87,.22) 0%, transparent 70%),
+    #0a1419;
+  padding: max(28px, env(safe-area-inset-top)) 0 max(40px, env(safe-area-inset-bottom));
+}
+
+.hero { padding: 16px 24px 8px; }
+.eyebrow { font-size: 12px; letter-spacing: .18em; color: #37f0e6; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+h1 { font-size: 36px; font-weight: 700; color: #fff; margin: 4px 0 10px; letter-spacing: .04em;
+     text-shadow: 0 0 18px rgba(255,79,216,.7), 0 0 2px #ff4fd8; }
+.lead { font-size: 15px; line-height: 1.7; color: #9fc4c0; }
+
+.molds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; padding: 18px 10px 6px; }
+.molds figure { text-align: center; }
+.molds img { width: 100%; max-width: 150px; height: auto; display: block; margin: 0 auto; }
+.float { animation: float 4.5s ease-in-out infinite; }
+.f2 { animation-delay: -1.5s; } .f3 { animation-delay: -3s; }
+@keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
+
+/* 霓虹邊光：黴菌本體還是粉彩絨毛，只是被燈打到 */
+.rim-cyan { filter: drop-shadow(0 0 6px rgba(55,240,230,.9)) drop-shadow(0 0 18px rgba(55,240,230,.45)); }
+.rim-pink { filter: drop-shadow(0 0 6px rgba(255,79,216,.9)) drop-shadow(0 0 18px rgba(255,79,216,.45)); }
+
+figcaption b { display: block; font-size: 17px; color: #fff; }
+figcaption i { display: block; font-size: 11px; color: #37f0e6; font-style: italic; margin-bottom: 4px; opacity: .8; }
+figcaption span { display: block; font-size: 12px; line-height: 1.5; color: #9fc4c0; padding: 0 2px; }
+
+.room { padding: 26px 0 0; }
+.room h2 { font-size: 20px; color: #fff; padding: 0 24px; }
+.hint { font-size: 12px; color: #37f0e6; padding: 2px 24px 12px; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; opacity: .85; }
+
+.scene { position: relative; width: 100%; aspect-ratio: 6 / 5; overflow: hidden; }
+.scene .bg, .scene .plants { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.scene .plants { pointer-events: none; }
+
+.light { position: absolute; border-radius: 50%; pointer-events: none; mix-blend-mode: screen;
+         animation: breathe 4s ease-in-out infinite; }
+@keyframes breathe { 0%,100% { opacity:.55; transform: scale(1) } 50% { opacity:.9; transform: scale(1.06) } }
+.l-pink { left: 10%; top: 8%;  width: 52%; height: 50%; background: radial-gradient(closest-side, rgba(255,79,216,.35), transparent); }
+.l-cyan { left: 60%; top: 40%; width: 42%; height: 44%; background: radial-gradient(closest-side, rgba(55,240,230,.28), transparent); animation-delay:-2s; }
+
+.scene .mold { position: absolute; height: auto; }
+.on-bread { left: 20%; top: 44%; width: 30%; }
+.on-wall  { left: 36%; top: 14%; width: 28%; transform: rotate(-10deg); }
+.in-jar   { left: 66%; top: 36%; width: 22%; }
+
+footer { padding: 30px 24px 0; font-size: 11px; color: #4f7a76; text-align: center; letter-spacing: .05em; }
+
+@media (min-width: 720px) {
+  #app { padding-left: calc(50% - 360px); padding-right: calc(50% - 360px); }
+  h1 { font-size: 48px; }
+  .molds img { max-width: 200px; }
+  figcaption span { font-size: 14px; }
+}
