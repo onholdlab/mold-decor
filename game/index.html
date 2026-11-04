@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>黴菌裝潢</title>
+<meta name="description" content="放麵包、米、水滴或乾燥劑，引導黴菌自己長過去，把牆角養成裝潢。">
+<link rel="stylesheet" href="style.css">
+<style id="inapp-lock">
+/* Threads / IG / FB 內建瀏覽器：鎖住整頁（寫法沿用 onholdlab/crossroad） */
+html,body{height:100%;overflow:hidden!important;overscroll-behavior:none}
+body{position:fixed;inset:0}
+/* 文件比畫面高 2px 並捲到 1px：App 會認為網頁不在最頂端，往下拖就不會把整個瀏覽器面板拉走 */
+html{height:calc(100% + 2px)!important}
+</style>
+<script id="inapp-lock-js">
+(function(){
+  var SKIP='button,input,textarea,select,a,label,[contenteditable]';
+  function scrollable(el){
+    for(;el&&el.nodeType===1&&el!==document.body;el=el.parentElement){
+      var y=getComputedStyle(el).overflowY;
+      if((y==='auto'||y==='scroll')&&el.scrollHeight>el.clientHeight)return true;
+    }
+    return false;
+  }
+  document.addEventListener('touchstart',function(e){
+    var t=e.target;if(t.nodeType!==1)t=t.parentElement;
+    if(t&&!t.closest(SKIP)&&!scrollable(t))e.preventDefault();
+  },{passive:false});
+  document.addEventListener('touchmove',function(e){
+    var t=e.target;if(t.nodeType!==1)t=t.parentElement;
+    if(!scrollable(t))e.preventDefault();
+  },{passive:false});
+  document.addEventListener('gesturestart',function(e){e.preventDefault();});
+  /* inapp-keep1 */
+  function keep(){if(window.scrollY<1)window.scrollTo(0,1);}
+  keep();addEventListener('load',keep);addEventListener('resize',keep);addEventListener('scroll',keep,{passive:true});
+  document.addEventListener('touchstart',keep,{passive:true,capture:true});
+})();
+</script>
+</head>
+<body>
+<div id="app">
+  <section class="stage" id="stage">
+    <canvas id="base"></canvas>
+    <canvas id="over"></canvas>
+    <div class="hud">
+      <span id="day">第 1 天</span>
+      <span id="env"></span>
+    </div>
+    <p class="msg" id="msg" role="status"></p>
+  </section>
+
+  <section class="panel">
+    <div class="row tools" role="radiogroup" aria-label="要放什麼" id="tools"></div>
+    <div class="row env">
+      <div class="seg" role="radiogroup" aria-label="濕度" id="hum"></div>
+      <div class="seg" role="radiogroup" aria-label="溫度" id="temp"></div>
+    </div>
+    <div class="row bar">
+      <button type="button" id="speed" class="ghost">速度 ×1</button>
+      <button type="button" id="dexBtn">圖鑑 <span id="dexCount">0/6</span></button>
+      <button type="button" id="reset" class="ghost">重來</button>
+    </div>
+  </section>
+</div>
+
+<div class="sheet-bg" id="sheetBg" hidden></div>
+<section class="sheet" id="dex" role="dialog" aria-modal="true" aria-labelledby="dexTitle" hidden>
+  <div class="sheet-head">
+    <h2 id="dexTitle">圖鑑</h2>
+    <button type="button" id="dexClose" class="ghost">關閉</button>
+  </div>
+  <div class="cards" id="cards"></div>
+  <p class="fine">遊戲裡的生長條件是簡化過的。現實中室內黴菌會影響健康，請不要在家裡養。</p>
+</section>
+
+<script src="assets/growth.js"></script>
+<script src="assets/game.js"></script>
+</body>
+</html>
