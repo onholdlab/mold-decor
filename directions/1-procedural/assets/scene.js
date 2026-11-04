@@ -7,7 +7,7 @@
   // 逐步繪圖器：items 依 t 排序，時間往前走就把新出生的畫上去（不重畫舊的）
   function Grower(canvas, build) {
     const ctx = canvas.getContext('2d');
-    let items = [], cursor = 0, W = 0, H = 0, seed = 1, bg = null;
+    let items = [], cursor = 0, W = 0, H = 0, seed = 1, bg = null, progress = 0;
     function size() {
       const r = canvas.getBoundingClientRect();
       W = Math.round(r.width); H = Math.round(r.height);
@@ -15,15 +15,24 @@
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     }
     function reset(newSeed) {
-      size(); seed = newSeed; cursor = 0;
+      size(); seed = newSeed; cursor = 0; progress = 0;
       const rng = G.makeRng(seed);
       const out = build(rng, W, H, ctx);
       items = out.items.sort((a, b) => a.t - b.t); bg = out.bg;
       ctx.clearRect(0, 0, W, H); if (bg) bg(ctx, W, H);
     }
     function advance(t) {
+      progress = t;
       while (cursor < items.length && items[cursor].t <= t) { items[cursor].draw(ctx); cursor++; }
     }
+    // Rebuild at the new CSS size, preserving the seed and growth progress.
+    new ResizeObserver(() => {
+      const r = canvas.getBoundingClientRect();
+      if (Math.round(r.width) === W && Math.round(r.height) === H) return;
+      const previousProgress = progress;
+      reset(seed);
+      advance(previousProgress);
+    }).observe(canvas);
     return { reset, advance, get done() { return cursor >= items.length; } };
   }
 
@@ -31,6 +40,7 @@
   const scene = document.getElementById('scene');
   const dayEl = document.getElementById('day');
   const DAYS = 7, DURATION = 14000; // 7 天在 14 秒內長完
+  let frameId = null, restartTimer = null;
   let t = 0, last = 0, seed = (Date.now() % 100000) | 0;
 
   const sceneGrower = Grower(scene, (rng, W, H) => {
@@ -94,17 +104,25 @@
     return { items, bg };
   });
 
-  function restart() { seed = (seed * 1103515245 + 12345) % 2147483647; sceneGrower.reset(seed); t = 0; last = performance.now(); }
+  function restart() {
+    cancelAnimationFrame(frameId);
+    clearTimeout(restartTimer);
+    restartTimer = null;
+    seed = (seed * 1103515245 + 12345) % 2147483647;
+    sceneGrower.reset(seed); t = 0; last = performance.now();
+    dayEl.textContent = '第 1 天';
+    frameId = requestAnimationFrame(frame);
+  }
   function frame(now) {
     if (!last) last = now;
     t = Math.min(1, t + (now - last) / DURATION); last = now;
     sceneGrower.advance(t);
     dayEl.textContent = '第 ' + Math.max(1, Math.ceil(t * DAYS)) + ' 天';
-    if (t >= 1) { setTimeout(restart, 2500); last = 0; return requestAnimationFrame(frame); }
-    requestAnimationFrame(frame);
+    if (t >= 1) { frameId = null; restartTimer = setTimeout(restart, 2500); return; }
+    frameId = requestAnimationFrame(frame);
   }
   scene.addEventListener('click', restart);
-  restart(); requestAnimationFrame(frame);
+  restart();
 
   // ---------- 三個標本條 ----------
   const specs = {
@@ -129,8 +147,18 @@
   };
   document.querySelectorAll('canvas[data-spec]').forEach((cv, k) => {
     const g = Grower(cv, specs[cv.dataset.spec]);
-    let s = 11 + k * 97, st = 0, l = 0;
-    const run = () => { s = (s * 48271) % 2147483647; g.reset(s); st = 0; l = performance.now(); const tick = (now) => { st = Math.min(1, st + (now - l) / 6000); l = now; g.advance(st); if (st < 1) requestAnimationFrame(tick); }; requestAnimationFrame(tick); };
+    let s = 11 + k * 97, st = 0, l = 0, frameId = null;
+    const tick = (now) => {
+      st = Math.min(1, st + (now - l) / 6000); l = now;
+      g.advance(st);
+      frameId = st < 1 ? requestAnimationFrame(tick) : null;
+    };
+    const run = () => {
+      cancelAnimationFrame(frameId);
+      s = (s * 48271) % 2147483647;
+      g.reset(s); st = 0; l = performance.now();
+      frameId = requestAnimationFrame(tick);
+    };
     cv.addEventListener('click', run); run();
   });
 })();
