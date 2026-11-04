@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <filter id="wobble" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="5" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3"/>
+    </filter>
+    <filter id="wash" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="9" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="10" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="0.8"/>
+    </filter>
+    <style>
+      .sway { transform-origin: 100px 140px; animation: sway 6s ease-in-out infinite; }
+      .s2 { animation-delay:-2s } .s3 { animation-delay:-4s }
+      @keyframes sway { 0%,100% { transform: rotate(-2.5deg) } 50% { transform: rotate(2.5deg) } }
+    </style>
+  </defs>
+
+  <!-- 水彩底色：故意比墨線大一點點，像暈開 -->
+  <g filter="url(#wash)" opacity="0.85">
+    <path fill="#9fd3c3" d="M40 158 C36 132 62 118 78 128 C82 106 116 100 128 122 C150 114 168 136 158 160 C168 172 148 182 132 176 C118 188 90 188 76 176 C58 184 38 176 40 158 Z"/>
+    <path fill="#c6e8dc" d="M66 150 C70 134 96 128 112 136 C120 128 140 134 138 150 Z"/>
+  </g>
+
+  <!-- 墨線 -->
+  <g filter="url(#wobble)" fill="none" stroke="#3b3024" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M40 158 C36 132 62 118 78 128 C82 106 116 100 128 122 C150 114 168 136 158 160 C168 172 148 182 132 176 C118 188 90 188 76 176 C58 184 38 176 40 158 Z"/>
+    <!-- 絨毛短線 -->
+    <path d="M48 150 l-5 -3 M54 136 l-4 -5 M70 124 l-2 -6 M92 112 l0 -6 M114 110 l2 -6 M136 122 l4 -5 M152 140 l5 -3 M160 164 l6 1 M140 180 l3 5 M100 190 l0 5 M66 182 l-3 5 M42 168 l-6 2"/>
+  </g>
+
+  <!-- 刷狀孢子柄 -->
+  <g class="sway" filter="url(#wobble)" stroke="#3b3024" stroke-width="1.6" stroke-linecap="round" fill="none">
+    <path d="M100 118 V66"/>
+    <path d="M100 66 l-12 -6 M100 66 l0 -12 M100 66 l12 -6"/>
+    <path d="M88 60 l-4 -8 M88 60 l2 -9 M100 54 l-3 -9 M100 54 l3 -9 M112 60 l-2 -9 M112 60 l4 -8"/>
+    <g fill="#7fc4b0" stroke="none"><circle cx="84" cy="51" r="2.6"/><circle cx="90" cy="50" r="2.6"/><circle cx="97" cy="44" r="2.6"/><circle cx="103" cy="44" r="2.6"/><circle cx="110" cy="50" r="2.6"/><circle cx="116" cy="51" r="2.6"/></g>
+  </g>
+  <g class="sway s2" filter="url(#wobble)" stroke="#3b3024" stroke-width="1.4" stroke-linecap="round" fill="none">
+    <path d="M64 128 V94"/>
+    <path d="M64 94 l-8 -5 M64 94 l0 -9 M64 94 l8 -5"/>
+    <g fill="#7fc4b0" stroke="none"><circle cx="55" cy="87" r="2.2"/><circle cx="64" cy="83" r="2.2"/><circle cx="73" cy="87" r="2.2"/></g>
+  </g>
+  <g class="sway s3" filter="url(#wobble)" stroke="#3b3024" stroke-width="1.4" stroke-linecap="round" fill="none">
+    <path d="M138 132 V98"/>
+    <path d="M138 98 l-8 -5 M138 98 l0 -9 M138 98 l8 -5"/>
+    <g fill="#7fc4b0" stroke="none"><circle cx="129" cy="91" r="2.2"/><circle cx="138" cy="87" r="2.2"/><circle cx="147" cy="91" r="2.2"/></g>
+  </g>
+
+</svg>

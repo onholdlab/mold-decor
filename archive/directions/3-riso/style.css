@@ -1,0 +1,36 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; width: 100%; overflow: hidden; position: fixed; overscroll-behavior: none;
+  background: #f3efe2; color: #1f2a44;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif; -webkit-text-size-adjust: 100%; }
+#app { height: 100%; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch;
+  background-color: #f3efe2;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.2 0 0 0 0 0.15 0 0 0 0 0.1 0 0 0 0.07 0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
+  padding: max(16px, env(safe-area-inset-top)) 0 max(32px, env(safe-area-inset-bottom)); }
+
+.stamp { padding: 0 16px; font-size: 13px; font-weight: 700; letter-spacing: .1em; color: #0078bf; }
+.stamp span { font-weight: 400; font-size: 11px; color: #ff48b0; margin-left: 10px; letter-spacing: .06em; }
+
+/* 海報式：三張版重疊、出血、大小不一 */
+.poster { position: relative; width: 100%; aspect-ratio: 3 / 3.6; margin-top: 4px; }
+.m { position: absolute; height: auto; mix-blend-mode: multiply; }
+.m-p { width: 74%; left: -10%; top: -2%; transform: rotate(-6deg); }
+.m-a { width: 66%; right: -6%; top: 16%; transform: rotate(8deg); }
+.m-m { width: 64%; left: -2%; top: 56%; transform: rotate(3deg); }
+
+.tag { position: absolute; font-size: 12px; line-height: 1.35; font-weight: 700; color: #1f2a44; }
+.tag i { font-weight: 400; font-size: 10px; color: #0078bf; }
+.t-p { left: 16px; top: 4%; }
+.t-a { right: 16px; top: 18%; text-align: right; }
+.t-m { right: 16px; bottom: 6%; text-align: right; }
+
+.room { position: relative; margin-top: 10px; }
+.room img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; }
+.t-r { left: 16px; bottom: 10px; font-weight: 700; color: #0078bf; font-size: 11px; letter-spacing: .08em; }
+
+.foot { padding: 18px 16px 0; font-size: 11px; color: #8a8a7a; }
+
+@media (min-width: 720px) {
+  #app { padding-left: calc(50% - 360px); padding-right: calc(50% - 360px); }
+  .poster { aspect-ratio: 3 / 2.6; }
+  .m-p { width: 52%; left: -2%; } .m-a { width: 50%; right: 0; top: 10%; } .m-m { width: 46%; left: 24%; top: 40%; }
+}

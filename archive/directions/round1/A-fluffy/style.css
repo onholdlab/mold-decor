@@ -1,0 +1,73 @@
+/* 方向 A：毛絨粉彩 */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;              /* body 不捲動 */
+  position: fixed;               /* 讓 Threads 內建瀏覽器抓不到頁面手勢 */
+  overscroll-behavior: none;
+  background: #fff4ee;
+  color: #6b5a66;
+  font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+#app {
+  height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;  /* 捲到底不要把捲動傳給外層 */
+  -webkit-overflow-scrolling: touch;
+  background:
+    radial-gradient(60% 40% at 20% 10%, #ffe9f1 0%, transparent 70%),
+    radial-gradient(50% 40% at 90% 30%, #e6f7f3 0%, transparent 70%),
+    radial-gradient(60% 50% at 50% 100%, #fff1d6 0%, transparent 70%),
+    #fff4ee;
+  padding: max(28px, env(safe-area-inset-top)) 0 max(40px, env(safe-area-inset-bottom));
+}
+
+.hero { padding: 16px 24px 8px; }
+.eyebrow { font-size: 13px; letter-spacing: .3em; color: #c48aa6; }
+h1 { font-size: 40px; font-weight: 700; color: #7d5b72; margin: 2px 0 10px; letter-spacing: .06em; }
+.lead { font-size: 15px; line-height: 1.7; color: #8a7384; }
+
+.molds {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  padding: 18px 10px 6px;
+}
+.molds figure { text-align: center; }
+.molds img { width: 100%; max-width: 150px; height: auto; display: block; margin: 0 auto; }
+.float { animation: float 4.5s ease-in-out infinite; }
+.f2 { animation-delay: -1.5s; } .f3 { animation-delay: -3s; }
+@keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
+figcaption b { display: block; font-size: 17px; color: #6b5a66; }
+figcaption i { display: block; font-size: 11px; color: #b89ab0; font-style: italic; margin-bottom: 4px; }
+figcaption span { display: block; font-size: 12px; line-height: 1.5; color: #8a7384; padding: 0 2px; }
+
+.room { padding: 26px 0 0; }
+.room h2 { font-size: 20px; color: #7d5b72; padding: 0 24px; }
+.hint { font-size: 13px; color: #b89ab0; padding: 2px 24px 12px; }
+
+.scene {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 6 / 5;
+  overflow: hidden;
+}
+.scene .bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.scene .mold { position: absolute; width: 26%; height: auto; filter: drop-shadow(0 6px 6px rgba(120, 80, 100, .18)); }
+/* 位置用百分比，手機和桌機一致 */
+.on-bread { left: 20%;  top: 44%; width: 30%; }
+.on-wall  { left: 37%;  top: 14%; width: 28%; transform: rotate(-10deg); }
+.on-floor { left: 50%;  top: 56%; width: 46%; }
+
+footer { padding: 30px 24px 0; font-size: 11px; color: #c4adbb; text-align: center; letter-spacing: .05em; }
+
+@media (min-width: 720px) {
+  #app { padding-left: calc(50% - 360px); padding-right: calc(50% - 360px); }
+  h1 { font-size: 52px; }
+  .molds img { max-width: 200px; }
+  figcaption span { font-size: 14px; }
+}

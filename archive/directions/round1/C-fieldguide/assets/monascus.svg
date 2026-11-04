@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <defs>
+    <filter id="wobble" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="2" seed="8" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3"/>
+    </filter>
+    <filter id="wash" x="-20%" y="-20%" width="140%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.05" numOctaves="3" seed="12" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="12" result="d"/>
+      <feGaussianBlur in="d" stdDeviation="1"/>
+    </filter>
+    <style>
+      .breathe { transform-origin: 100px 155px; animation: br 7s ease-in-out infinite; }
+      @keyframes br { 0%,100% { transform: scale(1) } 50% { transform: scale(1.02,1.01) } }
+    </style>
+  </defs>
+
+  <g class="breathe">
+    <!-- 紅麴：淡紅水彩暈開成一片 + 米粒 -->
+    <g filter="url(#wash)" opacity="0.8">
+      <path fill="#f0a3a8" d="M24 160 C22 142 46 132 64 140 C68 118 102 112 120 128 C142 118 172 132 172 152 C188 160 178 178 158 176 C142 186 112 188 94 180 C72 188 42 184 32 174 C20 172 18 164 24 160 Z"/>
+      <path fill="#d8737f" d="M60 150 C80 138 120 136 150 150 C130 160 80 162 60 150 Z"/>
+    </g>
+
+    <g filter="url(#wobble)" fill="none" stroke="#3b3024" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M24 160 C22 142 46 132 64 140 C68 118 102 112 120 128 C142 118 172 132 172 152 C188 160 178 178 158 176 C142 186 112 188 94 180 C72 188 42 184 32 174 C20 172 18 164 24 160 Z"/>
+    </g>
+
+    <!-- 米粒（紅麴長在米上） -->
+    <g filter="url(#wobble)" stroke="#3b3024" stroke-width="1.2" fill="#fff6ee">
+      <ellipse cx="50" cy="156" rx="7" ry="3.6" transform="rotate(-20 50 156)"/>
+      <ellipse cx="78" cy="146" rx="7" ry="3.6" transform="rotate(15 78 146)"/>
+      <ellipse cx="108" cy="140" rx="7" ry="3.6" transform="rotate(-10 108 140)"/>
+      <ellipse cx="140" cy="150" rx="7" ry="3.6" transform="rotate(25 140 150)"/>
+      <ellipse cx="92" cy="170" rx="7" ry="3.6" transform="rotate(-30 92 170)"/>
+      <ellipse cx="126" cy="170" rx="7" ry="3.6" transform="rotate(10 126 170)"/>
+      <ellipse cx="60" cy="172" rx="7" ry="3.6" transform="rotate(35 60 172)"/>
+    </g>
+    <!-- 閉囊殼小點 -->
+    <g fill="#b23a52">
+      <circle cx="66" cy="148" r="2"/><circle cx="96" cy="150" r="2"/><circle cx="124" cy="152" r="2"/><circle cx="152" cy="164" r="2"/>
+      <circle cx="40" cy="166" r="2"/><circle cx="110" cy="178" r="2"/><circle cx="80" cy="180" r="2"/>
+    </g>
+  </g>
+
+</svg>
